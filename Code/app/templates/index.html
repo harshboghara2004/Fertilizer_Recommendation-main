@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+
+
+<section id="scroll2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="imgcontainer">
+                    <img src="static/parallax/background.jpg" class="img-fluid" style="opacity: 0.8;">
+                </div>
+            </div>
+            <div class="col-md-12 " style="margin-top: 10%;">
+                <h3 class="title">
+                    Fill out the Details
+                </h3>
+                <form action="{{ url_for('processing') }}" method="post">
+                    <div class="form-group">
+                        <select class="form-control" name="crop" onchange="print_crop('crop',this.selectedIndex);"
+                            id="sts" required>
+                            <!-- Options will be populated dynamically -->
+                        </select>
+                        <script>
+                            print_crop("sts");
+                        </script>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" onchange="print_city('state',this.selectedIndex);" name="state"
+                            id="s" required>
+                            <!-- Options will be populated dynamically -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" name="city" id="state" required>
+                            <!-- Options will be populated dynamically -->
+                        </select>
+                        <script>
+                            print_state("s");
+                        </script>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" id="color">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+
+{% endblock %}

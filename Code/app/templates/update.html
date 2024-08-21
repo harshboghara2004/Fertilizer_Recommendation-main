@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    #container-1,
+    #container-2 {
+        padding: 10%;
+        /* border-right: 10px; */
+        border: solid;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+
+<div class="container1">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Temperature (&deg;C)</th>
+                <th>Humidity (%)</th>
+                <th>Rainfall (mm)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{TEMP}}</td>
+                <td>{{HUMIDITY}}</td>
+                <td>{{RAINFALL}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<section id="scroll2">
+    <div class="container">
+        <div class="container-1 " id="container-1">
+            <h3 class="title">
+                Entered Details
+            </h3>
+
+            <div class="option2">
+                <p class="state1">
+                <h3>&#x1F33E;CROP :-</h3>{{FORM_DATA['crop']}}</p>
+            </div>
+            <br>
+            <div class="option1">
+                <p class="state1">
+                <h3>STATE</h3>{{FORM_DATA['state']}}</p>
+                <br>
+                <p class="state1">
+                <h3>&#x1F3D9;&#xFE0F; CITY</h3>{{FORM_DATA['city']}}</p>
+            </div>
+
+        </div>
+        {% if CALL_SUCCESS|length == 1 %}
+        <div class="answer" id="container-2">
+            <h3 class="text-center" style="margin-bottom: auto; margin-top: auto;">Required Nutrient Ratio</h3>
+            <br>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>N</th>
+                        <th>P</th>
+                        <th>K</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{NPK[0]['Label_N']}}</td>
+                        <td>{{NPK[0]['Label_P'] }}</td>
+                        <td>{{NPK[0]['Label_K'] }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+            <hr>
+            <h3>Recommended fertilizer : <h1>{{predicted_fertilizer_temp}}</h1>
+            </h3>
+            <hr>
+            <hr>
+            <h2>RECOMMENDATION FOR FERTILIZER :-</h2>
+            <h5>Title :{{ POPUP_DATA.title}}</h5>
+            <h6>Description :{{ POPUP_DATA.description}}</h6>
+        </div>
+
+        {% endif %}
+
+        {% if CALL_SUCCESS|length == 0 %}
+        <div class="answer">
+            <h4 class="text-center">Data not available, try different city.</h4>
+        </div>
+        {% endif %}
+
+        <div class="text-center">
+            <form action="/">
+                <button type="submit" class="btn btn-primary">&lt; Back</button>
+            </form>
+        </div>
+
+    </div>
+
+
+    <script>
+        window.scrollBy(0, 25)
+    </script>
+</section>
+
+
+
+
+{% endblock %}
